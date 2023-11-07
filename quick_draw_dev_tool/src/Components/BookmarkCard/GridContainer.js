@@ -1,43 +1,53 @@
 import React, { useState } from "react";
 import BookmarkCard from "./BookmarkCard";
 import AddBookmarkCard from "./AddBookMarkCard";
+import { useAppState } from "../../Context/AppContext";
+
 
 const gridContainerStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(4, 1fr)", // 4 equal-width columns
-  gap: "16px", // Gap between the cards
-  maxWidth: "500px", // Set the maximum width
-  minWidth: "500px", // Set the minimum width
+  gap: "28px", // Gap between the cards
+  maxWidth: "600px", // Set the maximum width
+  minWidth: "600px", // Set the minimum width
   margin: "60px auto", // Center the grid horizontally
   justifyContent: "center",
 };
 
 function GridContainer() {
-  const [cards, setCards] = useState([<BookmarkCard />]);
+  const { state, dispatch } = useAppState(); // Use the context
 
   const addBookmarkCard = () => {
-    if (cards.length < 8) {
+    if (state.cards.length < 8) {
       // Limit to 8 bookmark cards
-      const updatedCards = [...cards, <BookmarkCard />];
-      setCards(updatedCards);
+      const newCard = {
+        index: state.cards.length,
+        title: "New bookmark",
+        bookmarks: [
+          {
+            bookmarkIndex: 0,
+            bookmarkName: "Default",
+            bookmarkUrl: "www.example.com",
+          },
+        ],
+      };
+      dispatch({ type: "ADD_CARD", payload: { card: newCard } });
+      state.cards.length==7&&setAddBookmarkVisible(false)
 
-      // If the maximum limit is reached, hide the AddBookmarkCard
-      if (updatedCards.length >= 8) {
-        setAddBookmarkVisible(false);
-      }
     }
   };
 
-  const [addBookmarkVisible, setAddBookmarkVisible] = useState(true);
+  const [addBookmarkVisible, setAddBookmarkVisible] = React.useState(true);
 
   return (
     <div style={gridContainerStyle}>
-      {cards.map((card, index) => (
-        <div key={index}>{card}</div>
+      {state.cards.map((card, index) => (
+        <div key={index}>
+          <BookmarkCard card={card} />
+        </div>
       ))}
-      {addBookmarkVisible && (
+      {addBookmarkVisible&& (
         <div onClick={addBookmarkCard}>
-          {/* This is the AddBookmarkCard */}
           <AddBookmarkCard />
         </div>
       )}

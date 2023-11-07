@@ -2,12 +2,11 @@ import React from "react";
 import { darkGrey, reactNativeIcon } from "../../../Assests/constants";
 
 const cardStyle = {
-  position: "absolute",
   width: "100px",
   height: "100px",
   padding: "16px",
   margin: "auto",
-  borderRadius: "8px",
+  borderRadius: "4px",
   backgroundColor: darkGrey,
   overflow: "hidden",
   color: "white",

@@ -8,7 +8,7 @@ const cardStyle = {
   height: "100px",
   padding: "16px",
   margin: "auto",
-  borderRadius: "8px",
+  borderRadius: "4px",
   boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
   backgroundColor: "#0D1117",
   overflow: "hidden",
@@ -25,18 +25,8 @@ const cardHoverStyle = {
   backgroundColor: darkGrey,
 };
 
-const editButtonStyle = {
-  top: "6px",
-  right: "6px",
-  color: "white",
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor:"red"
-};
 
-function BookmarkCard() {
+function BookmarkCard({card}) {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -75,9 +65,7 @@ function BookmarkCard() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-              <div style={editButtonStyle} onClick={handleEditClick}>
-          Edit
-        </div> 
+
         <div onClick={handleCardClick}>
           <img
             src={reactNativeIcon}
@@ -85,7 +73,7 @@ function BookmarkCard() {
             style={{
               width: "50px",
               height: "50px",
-              marginBottom: "8px",
+              marginTop: "16px",
               transform: isHovered ? "rotate(360deg)" : "rotate(0deg)",
               transition: "transform 2s",
             }}
@@ -97,7 +85,7 @@ function BookmarkCard() {
       </div>
 
       {isPopupVisible && (
-        <BookmarkCardPop setPopupVisible={(e) => setPopupVisible(e)} />
+        <BookmarkCardPop data={card.bookmarks} setPopupVisible={(e) => setPopupVisible(e)} />
       )}
     </div>
   );

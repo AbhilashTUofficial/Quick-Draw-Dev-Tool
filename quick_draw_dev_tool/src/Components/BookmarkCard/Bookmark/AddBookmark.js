@@ -6,7 +6,7 @@ const cardStyle = {
   height: "100px",
   padding: "16px",
   margin: "auto",
-  borderRadius: "8px",
+  borderRadius: "4px",
   backgroundColor: darkGrey,
   overflow: "hidden",
   color: "white",

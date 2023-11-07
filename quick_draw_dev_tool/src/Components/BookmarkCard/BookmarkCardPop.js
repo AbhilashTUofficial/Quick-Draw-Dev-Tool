@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import Bookmark from "./Bookmark/Bookmark";
 import { darkGrey, primaryAccent } from "../../Assests/constants";
 import AddBookmark from "./Bookmark/AddBookmark";
-import AddBookmarkForm from "./Bookmark/AddBookmarkForm"
-function BookmarkCardPop({ setPopupVisible }) {
+import AddBookmarkForm from "./Bookmark/AddBookmarkForm";
+function BookmarkCardPop({ data, setPopupVisible }) {
+  console.log(data);
+
   const popupStyle = {
     maxWidth: "700px",
     minWidth: "600px",
     minHeight: "400px",
-    maxHeight:"400px",
-    borderRadius: "8px",
+    maxHeight: "400px",
+    borderRadius: "4px",
     boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
     backgroundColor: darkGrey,
     display: "flex",
@@ -28,8 +30,8 @@ function BookmarkCardPop({ setPopupVisible }) {
     overflow: "scroll",
     padding: "16px",
     margin: "16px",
-    overflowY:"hidden",
-    overflowX:"hidden",
+    overflowY: "hidden",
+    overflowX: "hidden",
   };
 
   const containerWrapperStyle = {
@@ -44,17 +46,17 @@ function BookmarkCardPop({ setPopupVisible }) {
     gap: "16px",
   };
 
-  const closeButtonStyle = {
+  const editButtonStyle = {
     position: "absolute",
     top: "16px",
     right: "16px",
     background: darkGrey,
-    border: "1px solid white",    color: "white",
-    borderRadius:"99px",
+    border: "1px solid white",
+    color: "white",
+    borderRadius: "99px",
     cursor: "pointer",
-    height:"36px",
-    width:"36px"
-
+    height: "36px",
+    width: "36px",
   };
 
   // Create a ref for the popup element
@@ -65,10 +67,21 @@ function BookmarkCardPop({ setPopupVisible }) {
   const closePopup = () => {
     setPopupVisible(false);
   };
+  console.log(bookmarks)
 
-  const addBookmark = () => {
-    setBookmarks([...bookmarks, <Bookmark key={bookmarks.length} />]);
-  };
+  useEffect(() => {
+    data.map((_bookmark) => {
+      console.log("boi")
+      setBookmarks([
+        ...bookmarks,
+        <Bookmark
+          key={_bookmark.bookmarkIndex}
+          name={_bookmark.bookmarkName}
+          url={_bookmark.bookmarkUrl}
+        />,
+      ]);
+    });
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -84,7 +97,6 @@ function BookmarkCardPop({ setPopupVisible }) {
     };
   }, [popupRef]);
 
-
   const [showAddForm, setShowAddForm] = useState(false);
 
   const openAddForm = () => {
@@ -96,29 +108,35 @@ function BookmarkCardPop({ setPopupVisible }) {
   };
 
   const handleAddBookmark = ({ name, url }) => {
-    setBookmarks([...bookmarks, <Bookmark key={bookmarks.length} name={name} url={url} />]);
+    setBookmarks([
+      ...bookmarks,
+      <Bookmark key={bookmarks.length} name={name} url={url} />,
+    ]);
     closeAddForm();
   };
 
   return (
     <div ref={popupRef} style={{ ...popupStyle, zIndex: 99 }}>
-    <div style={containerWrapperStyle}>
-      <div style={contentContainerStyle}>
-        {bookmarks}
-        {showAddForm ? (
-          <AddBookmarkForm onAddBookmark={handleAddBookmark} onCancel={closeAddForm} />
-        ) : (
-          <div onClick={openAddForm}>
-            <AddBookmark />
-          </div>
-        )}
+      <div style={containerWrapperStyle}>
+        <div style={contentContainerStyle}>
+          {bookmarks}
+          {showAddForm ? (
+            <AddBookmarkForm
+              onAddBookmark={handleAddBookmark}
+              onCancel={closeAddForm}
+            />
+          ) : (
+            <div onClick={openAddForm}>
+              <AddBookmark />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
 
-    <button onClick={closePopup} style={closeButtonStyle}>
-      Close
-    </button>
-  </div>
+      <button onClick={() => {}} style={editButtonStyle}>
+        Edit
+      </button>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ const cardStyle = {
   height: "100px",
   padding: "16px",
   margin: "auto",
-  borderRadius: "8px",
+  borderRadius: "4px",
   backgroundColor: darkGrey,
   overflow: "hidden",
   color: "white",
@@ -45,8 +45,10 @@ const buttonStyle = {
 };
 
 function AddBookmarkForm({ onAddBookmark, onCancel }) {
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
+  const [name, setName] = useState(" ");
+  const [url, setUrl] = useState(" ");
+  const [key, setKey] = useState(" ");
+
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -57,7 +59,7 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
   };
 
   const handleSubmit = () => {
-    onAddBookmark({ name, url });
+    onAddBookmark( name, url, Math.random()*100 );
     setName("");
     setUrl("");
   };

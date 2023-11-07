@@ -45,6 +45,7 @@ function SearchBar() {
     display: "flex",
     justifyContent: "flex-start",
     marginTop: "10px",
+    marginBottom:"32px",
     color:custBlue
   };
 

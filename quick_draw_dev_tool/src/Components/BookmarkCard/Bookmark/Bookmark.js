@@ -1,6 +1,7 @@
 import React from "react";
-import { darkGrey, reactNativeIcon } from "../../../Assests/constants";
-
+import { darkGrey } from "../../../Assests/constants";
+import bookmarkIcon from "../../../Assests/Icons/ic_react_native.png";
+import editIcon from "../../../Assests/Icons/ic_edit.png";
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -25,12 +26,13 @@ const addButtonStyle = {
 const editButtonStyle = {
   top: "6px",
   right: "6px",
-  color: "white",
+  color: "green",
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-between",
 };
+
 
 function Bookmark() {
   const handleEditClick = () => {
@@ -39,12 +41,11 @@ function Bookmark() {
   };
 
   return (
-    <div >
+    <div>
       <div style={{ ...cardStyle }}>
-        <img src={reactNativeIcon} alt="Add" style={addButtonStyle} />
-        <div style={editButtonStyle} onClick={handleEditClick}>
-          Edit
-        </div> 
+
+        <img src={bookmarkIcon} alt="Add" style={addButtonStyle} />
+        <div style={editButtonStyle} onClick={handleEditClick}></div>
         <p>React Native</p>
       </div>
     </div>

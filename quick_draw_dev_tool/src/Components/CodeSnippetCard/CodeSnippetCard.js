@@ -1,5 +1,6 @@
 import React from "react";
 import { darkGrey } from "../../Assests/constants";
+import editIcon from "../../Assests/Icons/ic_edit.png";
 
 const containerStyle = {
   maxWidth: "540px", // Set the maximum width
@@ -21,14 +22,27 @@ const editButtonStyle = {
   cursor: "pointer",
 };
 
-function CodeSnippetCard({ children }) {
-  
+const editIconStyle = {
+  width: "24px",
+  height: "24px",
+  opacity: 0.8,
+  overflow: "hidden",
+  display: "flex",
+};
+
+function CodeSnippetCard({ snippets }) {
   return (
-    <div style={containerStyle}>
-      <div onClick={() => {}} style={editButtonStyle}>
-        Edit
-      </div>
-      {children}
+    <div>
+      {snippets.map((data, index) => (
+        <div style={containerStyle}>
+          <div onClick={() => {}} style={editButtonStyle}>
+            <img style={editIconStyle} src={editIcon} />
+          </div>
+          <div>
+            {data.snippet}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -43,7 +43,7 @@ function GridContainer() {
     <div style={gridContainerStyle}>
       {state.cards.map((card, index) => (
         <div key={index}>
-          <BookmarkCard card={card} />
+          <BookmarkCard card={card} cardIndex={card.index} />
         </div>
       ))}
       {addBookmarkVisible&& (

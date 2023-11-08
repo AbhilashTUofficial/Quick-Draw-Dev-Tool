@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CodeSnippetCard from "./CodeSnippetCard";
 import AddCodeSnippetCard from "./AddCodeSnipperCard";
-
-function CodeSnippetDropdown() {
+import dropdownIcon from "../../Assests/Icons/ic_dropdown.png"
+function CodeSnippetDropdown({collection}) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -58,6 +58,15 @@ function CodeSnippetDropdown() {
     cursor: "pointer",
   };
 
+  const dropdownIconStyle={
+    width:"24px",
+    height:"24px",
+    opacity:0.8,
+    transform: isOpen?"rotate(180deg)": "rotate(360deg)",
+    transition: "transform 0.2s, transform 0.3s ease-out", // Add ease-out transition
+
+  }
+
   const dropdownText = {
     color: "white",
     margin: "8px",
@@ -73,23 +82,14 @@ function CodeSnippetDropdown() {
         Delete
       </button>
       <button onClick={deleteCard} style={dropdownIntecatorStyle}>
-        {isOpen?"opend":"closed"}
+        <img onClick={toggleDropdown} style={dropdownIconStyle} src={dropdownIcon}/>
       </button>
       <div onClick={toggleDropdown} style={dropdownText}>
-        React Native code snips
+        {collection.title}
       </div>
       {isOpen && (
         <>
-          <CodeSnippetCard children={`
-          mView.findViewById(R.id.call_back_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhoneHelper phoneHelper = new PhoneHelper();
-                mView.setVisibility(View.INVISIBLE);
-                phoneHelper.openDialer(context, (String) connectedNumber.getText());
-            }
-        });
-          `} />
+          <CodeSnippetCard snippets={collection.snippets} />
           <AddCodeSnippetCard />
         </>
       )}

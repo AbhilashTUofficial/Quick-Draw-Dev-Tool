@@ -25,8 +25,7 @@ const cardHoverStyle = {
   backgroundColor: darkGrey,
 };
 
-
-function BookmarkCard({card}) {
+function BookmarkCard({ card,  cardIndex }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -41,7 +40,6 @@ function BookmarkCard({card}) {
   };
 
   const handleCardClick = () => {
-    console.log("click");
     setIsClicked(true);
     setTimeout(() => {
       setIsClicked(false);
@@ -65,7 +63,6 @@ function BookmarkCard({card}) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-
         <div onClick={handleCardClick}>
           <img
             src={reactNativeIcon}
@@ -80,12 +77,14 @@ function BookmarkCard({card}) {
           />
           <p>React Native</p>
         </div>
-  
-
       </div>
 
       {isPopupVisible && (
-        <BookmarkCardPop data={card.bookmarks} setPopupVisible={(e) => setPopupVisible(e)} />
+        <BookmarkCardPop
+          data={card.bookmarks}
+          setPopupVisible={(e) => setPopupVisible(e)}
+          cardIndex={cardIndex}
+        />
       )}
     </div>
   );

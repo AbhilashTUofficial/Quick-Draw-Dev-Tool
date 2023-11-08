@@ -1,6 +1,6 @@
 import React from "react";
-import { darkGrey, reactNativeIcon } from "../../../Assests/constants";
-
+import { darkGrey } from "../../../Assests/constants";
+import addIcon from "../../../Assests/Icons/ic_add.png"
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -19,8 +19,9 @@ const cardStyle = {
 };
 
 const addButtonStyle = {
-  width: "50px",
-  height: "50px",
+  width: "80px",
+  height: "80px",
+  opacity:0.6
 };
 
 
@@ -29,8 +30,7 @@ function Bookmark() {
   return (
     <div style={{ ...cardStyle }}>
 
-      <img src={reactNativeIcon} alt="Add" style={addButtonStyle} />
-      <p>React Native</p>
+      <img src={addIcon} alt="Add" style={addButtonStyle} />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import './Components/Common/CustomScrollbar.css';
 import CodeSnippetCard from "./Components/CodeSnippetCard/CodeSnippetCard";
 import CodeSnippetDropdown from "./Components/CodeSnippetCard/CodeSnippetDropdown";
 import AddCodeSnippetDropdown from "./Components/CodeSnippetCard/AddCodeSnippetDropdown";
+import CodeSnippetContainer from "./Components/CodeSnippetCard/CodeSnippetContainer";
 function App() {
   const containerStyle = {
     display: "flex",
@@ -29,10 +30,8 @@ function App() {
       <div className="App" style={containerStyle}>
         <GridContainer />
         <SearchBar />
-        <FilteredCards />
-        <CodeSnippetDropdown />
-        <CodeSnippetDropdown />
-        <CodeSnippetDropdown />
+        {/* <FilteredCards /> */}
+        <CodeSnippetContainer/>
         <AddCodeSnippetDropdown/>
 
       </div>

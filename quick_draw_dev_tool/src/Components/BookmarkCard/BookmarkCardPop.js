@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Bookmark from "./Bookmark/Bookmark";
-import { darkGrey, primaryAccent } from "../../Assests/constants";
+import { darkGrey } from "../../Assests/constants";
 import AddBookmark from "./Bookmark/AddBookmark";
 import AddBookmarkForm from "./Bookmark/AddBookmarkForm";
-function BookmarkCardPop({ data, setPopupVisible }) {
-  console.log(data);
+import editIcon from "../../Assests/Icons/ic_edit.png";
+import { useAppState } from "../../Context/AppContext";
 
+function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
   const popupStyle = {
     maxWidth: "700px",
     minWidth: "600px",
@@ -59,29 +60,36 @@ function BookmarkCardPop({ data, setPopupVisible }) {
     width: "36px",
   };
 
+  const editIconStyle = {
+    width: "24px",
+    height: "24px",
+    opacity: 0.8,
+    overflow: "hidden",
+    display: "flex",
+  };
+
   // Create a ref for the popup element
   const popupRef = useRef(null);
+  const { state, dispatch } = useAppState(); // Use the context
 
-  const [bookmarks, setBookmarks] = useState([]);
-
-  const closePopup = () => {
-    setPopupVisible(false);
-  };
-  console.log(bookmarks)
-
-  useEffect(() => {
+  const createBookmarks = () => {
+    var tempArray = [];
     data.map((_bookmark) => {
-      console.log("boi")
-      setBookmarks([
-        ...bookmarks,
+      tempArray.push(
         <Bookmark
           key={_bookmark.bookmarkIndex}
           name={_bookmark.bookmarkName}
           url={_bookmark.bookmarkUrl}
-        />,
-      ]);
+          cardIndex={cardIndex}
+          bookmarkIndex={_bookmark.bookmarkIndex}
+        />
+      );
     });
-  }, []);
+    return tempArray;
+  };
+  const closePopup = () => {
+    setPopupVisible(false);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -107,11 +115,19 @@ function BookmarkCardPop({ data, setPopupVisible }) {
     setShowAddForm(false);
   };
 
-  const handleAddBookmark = ({ name, url }) => {
-    setBookmarks([
-      ...bookmarks,
-      <Bookmark key={bookmarks.length} name={name} url={url} />,
-    ]);
+  const handleAddBookmark = ({ name, url, index }) => {
+    dispatch({
+      type: "ADD_BOOKMARK",
+      payload: {
+        cardIndex:cardIndex,
+        bookmark: {
+          bookmarkIndex: index,
+          bookmarkName: name,
+          bookmarkUrl: url,
+        },
+      },
+    });
+
     closeAddForm();
   };
 
@@ -119,7 +135,7 @@ function BookmarkCardPop({ data, setPopupVisible }) {
     <div ref={popupRef} style={{ ...popupStyle, zIndex: 99 }}>
       <div style={containerWrapperStyle}>
         <div style={contentContainerStyle}>
-          {bookmarks}
+          {createBookmarks()}
           {showAddForm ? (
             <AddBookmarkForm
               onAddBookmark={handleAddBookmark}
@@ -134,7 +150,7 @@ function BookmarkCardPop({ data, setPopupVisible }) {
       </div>
 
       <button onClick={() => {}} style={editButtonStyle}>
-        Edit
+        <img style={editIconStyle} src={editIcon} />
       </button>
     </div>
   );

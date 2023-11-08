@@ -41,7 +41,7 @@ function AddCodeSnippetDropdown() {
     >
 
       <div onClick={()=>{}} style={dropdownText}>
-        Add New Snippit Collection
+        Add New Snippet Collection
       </div>
   
     </div>

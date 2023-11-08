@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { darkGrey, primaryAccent } from "../../Assests/constants";
+import addIcon from "../../Assests/Icons/ic_add.png";
 
 const cardStyle = {
     width: "100px",
@@ -11,7 +12,10 @@ const cardStyle = {
     backgroundColor:primaryAccent,
     overflow: "hidden",
     transition: "transform 0.2s, background-color 0.2s",
-    color:"white"
+    color:"white",    
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
   };
   
   const cardHoverStyle = {
@@ -50,8 +54,18 @@ function AddBookmarkCard() {
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
     >
-      {/* Card content goes here */}
-      <h3>Add BookMark</h3>
+           <img
+            src={addIcon}
+            alt="React Native"
+            style={{
+              width: "80px",
+              height: "80px",
+              opacity:isHovered?0.7:0.4,
+              content:"fill",
+              transform: isHovered ? "rotate(360deg)" : "rotate(0deg)",
+              transition: "transform 2s",
+            }}
+          />
     </div>
   );
 }

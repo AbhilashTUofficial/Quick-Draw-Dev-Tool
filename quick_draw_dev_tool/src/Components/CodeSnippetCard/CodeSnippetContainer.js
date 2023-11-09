@@ -11,7 +11,6 @@ export default function CodeSnippetContainer() {
             {snippetCollections && Array.isArray(snippetCollections) ? (
                 snippetCollections.map((collection, index) => (
                     
-                    // <div>{collection.title}</div>
                     <CodeSnippetDropdown key={index} collection={collection} />
                 ))
             ) : (

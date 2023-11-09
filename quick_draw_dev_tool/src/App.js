@@ -1,5 +1,5 @@
 import "./App.css";
-import { primary } from "./Assests/constants";
+import { primary, primaryAccent } from "./Assests/constants";
 import GridContainer from "./Components/BookmarkCard/GridContainer";
 import SearchBar from "./Components/SearchBar/SearchBar";
 import SearchResultCard from "./Components/SearchResultCard/SearchResultCard";
@@ -10,13 +10,15 @@ import CodeSnippetDropdown from "./Components/CodeSnippetCard/CodeSnippetDropdow
 import AddCodeSnippetDropdown from "./Components/CodeSnippetCard/AddCodeSnippetDropdown";
 import CodeSnippetContainer from "./Components/CodeSnippetCard/CodeSnippetContainer";
 function App() {
+
+
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     minHeight: "100vh",
-    backgroundColor: primary,
+    backgroundColor: primaryAccent,
   };
 
   function FilteredCards() {

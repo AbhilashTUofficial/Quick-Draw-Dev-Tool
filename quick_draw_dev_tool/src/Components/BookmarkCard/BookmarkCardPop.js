@@ -5,6 +5,7 @@ import AddBookmark from "./Bookmark/AddBookmark";
 import AddBookmarkForm from "./Bookmark/AddBookmarkForm";
 import editIcon from "../../Assests/Icons/ic_edit.png";
 import { useAppState } from "../../Context/AppContext";
+import deleteIcon from "../../Assests/Icons/ic_delete.png";
 
 function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
   const popupStyle = {
@@ -47,50 +48,30 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
     gap: "16px",
   };
 
-  const editButtonStyle = {
+  const buttonContainerStyle = {
     position: "absolute",
-    top: "16px",
-    right: "16px",
-    background: darkGrey,
-    border: "1px solid white",
-    color: "white",
-    borderRadius: "99px",
-    cursor: "pointer",
-    height: "36px",
-    width: "36px",
-  };
-
-  const editIconStyle = {
-    width: "24px",
-    height: "24px",
-    opacity: 0.8,
-    overflow: "hidden",
+    top: "12px",
+    right: "8px",
     display: "flex",
+    justifyContent: "space-between",
   };
 
-  // Create a ref for the popup element
+  const buttonStyle = {
+    backgroundColor: darkGrey,
+    border: "1px solid white",
+    borderRadius: "99px",
+    padding: "4px 4px",
+    margin: "4px",
+    color: "white",
+    cursor: "pointer",
+    width: "18px",
+    height: "18px",
+    marginLeft: "10px",
+    marginRight: "10px",
+  };
+
   const popupRef = useRef(null);
-  const { state, dispatch } = useAppState(); // Use the context
-
-  const createBookmarks = () => {
-    var tempArray = [];
-    data.map((_bookmark) => {
-      tempArray.push(
-        <Bookmark
-          key={_bookmark.bookmarkIndex}
-          name={_bookmark.bookmarkName}
-          url={_bookmark.bookmarkUrl}
-          cardIndex={cardIndex}
-          bookmarkIndex={_bookmark.bookmarkIndex}
-        />
-      );
-    });
-    return tempArray;
-  };
-  const closePopup = () => {
-    setPopupVisible(false);
-  };
-
+  const { state, dispatch } = useAppState();
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -115,11 +96,68 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
     setShowAddForm(false);
   };
 
-  const handleAddBookmark = ({ name, url, index }) => {
+  const handleDeleteBookmark = (index) => {
+    dispatch({
+      type: "DELETE_BOOKMARK",
+      payload: {
+        deleteCardIndex: cardIndex,
+        deleteBookmarkIndex: index,
+      },
+    });
+  };
+  const handleEditBookmark = (index, name, url) => {
+    dispatch({
+      type: "EDIT_BOOKMARK",
+      payload: {
+        cardIndex: cardIndex,
+        bookmark: {
+          bookmarkIndex: index,
+          bookmarkName: name,
+          bookmarkUrl: url,
+        },
+      },
+    });
+  };
+
+  const createBookmarks = () => {
+    var tempArray = [];
+    data.map((_bookmark) => {
+      tempArray.push(
+        <Bookmark
+          key={_bookmark.bookmarkIndex}
+          name={_bookmark.bookmarkName}
+          url={_bookmark.bookmarkUrl}
+          cardIndex={cardIndex}
+          bookmarkIndex={_bookmark.bookmarkIndex}
+          handleDeleteBookmark={(index) => handleDeleteBookmark(index)}
+          handleEditBookmark={(index, name, url) =>
+            handleEditBookmark(index, name, url)
+          }
+        />
+      );
+    });
+    return tempArray;
+  };
+
+  const handleDeleteCard = () => {
+    closePopup();
+    dispatch({
+      type: "DELETE_CARD",
+      payload: {
+        deleteCardIndex: cardIndex,
+      },
+    });
+  };
+
+  const closePopup = () => {
+    setPopupVisible(false);
+  };
+
+  const handleAddBookmark = (name, url, index) => {
     dispatch({
       type: "ADD_BOOKMARK",
       payload: {
-        cardIndex:cardIndex,
+        cardIndex: cardIndex,
         bookmark: {
           bookmarkIndex: index,
           bookmarkName: name,
@@ -138,7 +176,9 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
           {createBookmarks()}
           {showAddForm ? (
             <AddBookmarkForm
-              onAddBookmark={handleAddBookmark}
+              onAddBookmark={(name, url, index) =>
+                handleAddBookmark(name, url, index)
+              }
               onCancel={closeAddForm}
             />
           ) : (
@@ -149,9 +189,18 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
         </div>
       </div>
 
-      <button onClick={() => {}} style={editButtonStyle}>
-        <img style={editIconStyle} src={editIcon} />
-      </button>
+      <div style={buttonContainerStyle}>
+        <img
+          src={editIcon}
+          onClick={() => handleEditBookmark()}
+          style={buttonStyle}
+        />
+        <img
+          src={deleteIcon}
+          onClick={() => handleDeleteCard()}
+          style={buttonStyle}
+        />
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BookmarkCardPop from "./BookmarkCardPop";
 import reactNativeIcon from "../../Assests/Icons/ic_react_native.png";
 import { darkGrey } from "../../Assests/constants";
+import { useAppState } from "../../Context/AppContext";
 
 const cardStyle = {
   width: "100px",
@@ -25,7 +26,8 @@ const cardHoverStyle = {
   backgroundColor: darkGrey,
 };
 
-function BookmarkCard({ card,  cardIndex }) {
+function BookmarkCard({ card, cardIndex, index }) {
+  const { state, dispatch } = useAppState();
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -52,6 +54,8 @@ function BookmarkCard({ card,  cardIndex }) {
     console.log("Edit button clicked");
   };
 
+
+
   return (
     <div>
       <div
@@ -75,7 +79,7 @@ function BookmarkCard({ card,  cardIndex }) {
               transition: "transform 2s",
             }}
           />
-          <p>React Native</p>
+          <p>Collection {index}</p>
         </div>
       </div>
 

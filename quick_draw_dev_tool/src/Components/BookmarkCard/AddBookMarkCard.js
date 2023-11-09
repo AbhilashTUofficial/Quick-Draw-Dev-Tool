@@ -40,7 +40,7 @@ function AddBookmarkCard() {
     setIsClicked(true);
     setTimeout(() => {
       setIsClicked(false);
-    }, 200); // Reset the click effect after 200ms
+    }, 200); 
   };
 
   return (

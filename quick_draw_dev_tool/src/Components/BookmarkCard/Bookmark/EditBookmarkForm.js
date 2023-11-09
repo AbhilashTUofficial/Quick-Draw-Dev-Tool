@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { darkGrey } from "../../../Assests/constants";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -16,7 +16,7 @@ const cardStyle = {
   alignItems: "center",
   justifyContent: "center",
   border: "1px solid white",
-  transition: "border 0.3s linear", // Add line border style
+  transition: "border 0.3s linear", 
 };
 
 const inputStyle = {
@@ -24,24 +24,24 @@ const inputStyle = {
   border: "none",
   borderBottom: "1px solid white",
   padding: "4px",
-  margin: "4px", 
+  margin: "4px",
   color: "white",
-  width: "80px", 
+  width: "80px",
   outline: "none",
 };
 
 const buttonContainerStyle = {
   display: "flex",
-  justifyContent: "space-between", 
-  margin: "8px", 
+  justifyContent: "space-between",
+  margin: "8px",
 };
 
 const buttonStyle = {
   backgroundColor: darkGrey,
-  border: "1px solid white", 
+  border: "1px solid white",
   borderRadius: "4px",
   padding: "4px 8px",
-  margin: "4px", 
+  margin: "4px",
   color: "white",
   cursor: "pointer",
 };
@@ -58,38 +58,41 @@ const blinkKeyframes = `
   }
 `;
 
-
-
 const styleTag = document.createElement("style");
 styleTag.type = "text/css";
 styleTag.appendChild(document.createTextNode(blinkKeyframes));
 document.head.appendChild(styleTag);
 
-function AddBookmarkForm({ onAddBookmark, onCancel }) {
-
+function EditBookmarkForm({
+  bookmarkName,
+  cardIndex,
+  bookmarkIndex,
+  bookmarkUrl,
+  onCancel,
+}) {
   const validUrlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
   const [error, setError] = useState(false);
 
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
+  const [name, setName] = useState(bookmarkName);
+  const [url, setUrl] = useState(bookmarkUrl);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
   const handleUrlChange = (e) => {
-    setUrl(e.target.value.slice(0, 100));
+    setUrl(e.target.value.slice(0, 100)); 
   };
 
   const handleSubmit = () => {
     if (name.trim() !== "" && validUrlRegex.test(url.trim())) {
-      onAddBookmark(name, url, Math.round(Math.random() * 10000));
+      
       setName("");
       setUrl("");
-    }else{
-      toast('Dont leave them blank', {
-        type: 'warning',
+    } else {
+      toast("Dont leave them blank", {
+        type: "warning",
       });
 
       setError(true);
@@ -97,33 +100,11 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
       setTimeout(() => {
         setError(false);
       }, 2000);
-      
     }
   };
 
-  useEffect(() => {
-    navigator.clipboard.readText().then((clipboardText) => {
-      if(validUrlRegex.test(clipboardText)){
-        setUrl(clipboardText.slice(0, 100)); 
-
-      }
-    });
-    document.addEventListener("paste", handleClipboardChange);
-
-    return () => {
-      document.removeEventListener("paste", handleClipboardChange);
-    };
-  }, []);
-
-  const handleClipboardChange = (e) => {
-    // Handle clipboard changes, similar to the "Add" button click
-    navigator.clipboard.readText().then((clipboardText) => {
-      setUrl(clipboardText.slice(0, 100)); // Paste clipboard text and limit to 100 characters
-    });
-  };
-
   return (
-    <div style={{...cardStyle,...(error && errorBorderStyle)}}>
+    <div style={{ ...cardStyle, ...(error && errorBorderStyle) }}>
       <input
         type="text"
         placeholder="Name"
@@ -150,4 +131,4 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
   );
 }
 
-export default AddBookmarkForm;
+export default EditBookmarkForm;

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import CodeSnippetCard from "./CodeSnippetCard";
-import AddCodeSnippetCard from "./AddCodeSnipperCard";
 import { darkGrey } from "../../Assests/constants";
+import { useAppState } from "../../Context/AppContext";
 
 function AddCodeSnippetDropdown() {
   const [isHovered, setIsHovered] = useState(false);
+  const { state, dispatch } = useAppState();
 
   const deleteCard = () => {
     // Implement card deletion logic
@@ -24,8 +24,8 @@ function AddCodeSnippetDropdown() {
     padding: "8px",
     backgroundColor: darkGrey,
     borderRadius: "4px",
-    position: "relative", 
-    opacity: isHovered?0.8:0.4
+    position: "relative",
+    opacity: isHovered ? 0.8 : 0.4,
   };
 
   const dropdownText = {
@@ -33,17 +33,25 @@ function AddCodeSnippetDropdown() {
     margin: "8px",
   };
 
+  const handleAddSnippetCollection = () => {
+    dispatch({
+      type: "ADD_SNIPPET_COLLECTION",
+      payload: {
+        index: Math.round(Math.random() * 10000),
+        title: "Rename Your Snippet Collection",
+        snippets: [],
+      },
+    });
+  };
   return (
     <div
       style={dropdownStyle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-
-      <div onClick={()=>{}} style={dropdownText}>
+      <div onClick={() => handleAddSnippetCollection()} style={dropdownText}>
         Add New Snippet Collection
       </div>
-  
     </div>
   );
 }

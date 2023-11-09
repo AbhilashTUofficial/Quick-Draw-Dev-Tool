@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { darkGrey } from "../../../Assests/constants";
 import bookmarkIcon from "../../../Assests/Icons/ic_react_native.png";
 import editIcon from "../../../Assests/Icons/ic_edit.png";
+import deleteIcon from "../../../Assests/Icons/ic_delete.png";
+import EditBookmarkForm from "./EditBookmarkForm";
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -15,7 +17,7 @@ const cardStyle = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  border: "1px solid white", // Add line border style
+  border: "1px solid white",
 };
 
 const addButtonStyle = {
@@ -23,31 +25,72 @@ const addButtonStyle = {
   height: "50px",
 };
 
-const editButtonStyle = {
-  top: "6px",
-  right: "6px",
-  color: "green",
-  cursor: "pointer",
+const buttonContainerStyle = {
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
+  marginTop: "8px", 
 };
 
+const buttonStyle = {
+  backgroundColor: darkGrey,
+  border: "1px solid white",
+  borderRadius: "99px",
+  padding: "4px 4px",
+  margin: "4px",
+  color: "white",
+  cursor: "pointer",
+  width: "18px",
+  height: "18px",
+  marginLeft: "10px",
+  marginRight: "10px",
+};
 
-function Bookmark() {
-  const handleEditClick = () => {
-    // Handle the edit button click
-    console.log("Edit button clicked");
+function Bookmark({ key, name, url, cardIndex, bookmarkIndex, handleDeleteBookmark,handleEditBookmark }) {
+  const [editing, setEditing] = useState(false);
+
+  const handleClick = () => {
+    window.open(url, "_blank");
   };
 
+  const handleDelete = () => {
+    handleDeleteBookmark(bookmarkIndex)
+  };
+
+  const handleEdit = () => {
+    handleEditBookmark(bookmarkIndex,name,url)
+  };
+
+  // console.log(webkitURL)
   return (
     <div>
-      <div style={{ ...cardStyle }}>
-
-        <img src={bookmarkIcon} alt="Add" style={addButtonStyle} />
-        <div style={editButtonStyle} onClick={handleEditClick}></div>
-        <p>React Native</p>
-      </div>
+      {editing ? (
+        <EditBookmarkForm
+          bookmarkName={name}
+          cardIndex={cardIndex}
+          bookmarkIndex={bookmarkIndex}
+          bookmarkUrl={url}
+          onCancel={() => setEditing(false)}
+          onOkay={()=>{}}
+        />
+      ) : (
+        <div style={cardStyle}>
+          <img
+            src={bookmarkIcon}
+            onClick={handleClick}
+            alt="Bookmark"
+            style={addButtonStyle}
+          />
+          <div style={{padding:"2px"}} onClick={handleClick}>{name}</div>
+          <div style={buttonContainerStyle}>
+            <img src={deleteIcon} onClick={()=>handleDelete()} style={buttonStyle} />
+            <img
+              src={editIcon}
+              onClick={() => setEditing(true)}
+              style={buttonStyle}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

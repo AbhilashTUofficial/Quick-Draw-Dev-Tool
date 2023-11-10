@@ -9,16 +9,16 @@ import deleteIcon from "../../Assests/Icons/ic_delete.png";
 
 function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
   const popupStyle = {
-    maxWidth: "700px",
-    minWidth: "600px",
+    maxWidth: "600px",
+    width:"80%",
     minHeight: "400px",
     maxHeight: "400px",
     borderRadius: "4px",
     boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
     backgroundColor: innerColor,
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    // flexDirection: "column",
+    // alignItems: "center",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -30,7 +30,6 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
     opacity: 1,
     overflow: "scroll",
     padding: "16px",
-    margin: "16px",
     overflowY: "hidden",
     overflowX: "hidden",
   };
@@ -41,9 +40,9 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
 
   const contentContainerStyle = {
     flex: 1,
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
+    display: "flex",
+    flexWrap:"wrap",
+    gap: "8px",
   };
 
   const buttonContainerStyle = {

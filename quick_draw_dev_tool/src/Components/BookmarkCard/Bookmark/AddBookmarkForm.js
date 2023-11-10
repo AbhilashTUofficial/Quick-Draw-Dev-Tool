@@ -8,7 +8,6 @@ const cardStyle = {
   width: "100px",
   height: "100px",
   padding: "16px",
-  margin: "auto",
   borderRadius: "4px",
   backgroundColor: innerColor,
   overflow: "hidden",
@@ -17,8 +16,8 @@ const cardStyle = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  border: "1px solid white", // Add line border style
-  transition: "border 0.3s linear", // Add border transition
+  border: "1px solid white", 
+  transition: "border 0.3s linear", 
 };
 
 // Input field style

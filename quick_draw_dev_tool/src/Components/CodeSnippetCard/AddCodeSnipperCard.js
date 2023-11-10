@@ -8,10 +8,11 @@ function AddCodeSnippetCard({ collectionIndex }) {
 
   const containerStyle = {
     maxWidth: "540px",
-    minWidth: "540px",
+    width:"100%",
     margin: "15px auto",
     border: "1px solid lightgrey",
-    padding: "16px",
+    paddingTop: "16px",
+    paddingBottom:"16px",
     backgroundColor: innerColor,
     borderRadius: "4px",
     position: "relative",

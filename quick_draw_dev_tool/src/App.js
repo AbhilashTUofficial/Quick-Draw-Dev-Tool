@@ -32,7 +32,7 @@ function App() {
         <DataControlButtons />
         <GridContainer />
         <CodeSnippetContainer />
-        <AddCodeSnippetDropdown />
+        {/* <AddCodeSnippetDropdown /> */}
       </div>
     </AppProvider>
   );

@@ -4,11 +4,10 @@ import AddBookmarkCard from "./AddBookmarkCard";
 import { useAppState } from "../../Context/AppContext";
 
 const gridContainerStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(4, 1fr)",
+  display: "flex",
   gap: "28px",
-  maxWidth: "600px",
-  minWidth: "600px",
+  flexWrap:"wrap",
+  maxWidth: "700px",
   margin: "60px auto",
   justifyContent: "center",
 };

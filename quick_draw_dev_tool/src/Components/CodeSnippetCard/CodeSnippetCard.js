@@ -5,10 +5,11 @@ import deleteIcon from "../../Assests/Icons/ic_delete.png";
 import { useAppState } from "../../Context/AppContext";
 import saveIcon from "../../Assests/Icons/ic_checked.png";
 import cancelIcon from "../../Assests/Icons/ic_cancel.png";
+import useViewportWidth from "../Common/UseViewportWidth";
 
 const containerStyle = {
   maxWidth: "540px",
-  minWidth: "540px",
+  // minWidth: "540px",
   margin: "15px auto",
   border: "1px solid lightgrey",
   padding: "16px",
@@ -20,7 +21,7 @@ const containerStyle = {
 const buttonContainerStyle = {
   position: "absolute",
   top: "12px",
-  right: "8px",
+  right: "0px",
   display: "flex",
   justifyContent: "space-between",
 };
@@ -43,6 +44,7 @@ function CodeSnippetCard({ collectionIndex, snippets }) {
   const { state, dispatch } = useAppState();
   const [editableSnippets, setEditableSnippets] = useState([]);
   const [editedSnippets, setEditedSnippets] = useState([]);
+  const viewportWidth = useViewportWidth();
 
   const handleDelete = (index) => {
     dispatch({
@@ -100,10 +102,10 @@ function CodeSnippetCard({ collectionIndex, snippets }) {
   };
 
   return (
-    <div>
+    <div style={{width:"100%"}}>
       {snippets.map((data, index) => (
         <div style={containerStyle} key={data.snippetIndex}>
-          <div style={buttonContainerStyle}>
+          <div style={viewportWidth>400?buttonContainerStyle:{}}>
             <img
               src={editableSnippets[index] ? saveIcon : editIcon}
               onClick={() => {

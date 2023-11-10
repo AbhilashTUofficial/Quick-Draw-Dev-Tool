@@ -7,7 +7,13 @@ export default function CodeSnippetContainer() {
     const snippetCollections = state.snippetCollections;
 
     return (
-        <div>
+        <div style={{
+            width:"100%",
+            justifyContent:"center",
+            alignItems:"center",
+            display:"flex",
+            flexDirection:"column"
+        }}>
             {Array.isArray(snippetCollections) ? (
                 snippetCollections.map((collection, index) => (
                     <CodeSnippetDropdown key={index} collection={collection} />

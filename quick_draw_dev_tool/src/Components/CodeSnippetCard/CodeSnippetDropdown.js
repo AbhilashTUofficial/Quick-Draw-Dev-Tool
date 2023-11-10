@@ -8,6 +8,7 @@ import editIcon from "../../Assests/Icons/ic_edit.png";
 import { useAppState } from "../../Context/AppContext";
 import saveIcon from "../../Assests/Icons/ic_checked.png";
 import cancelIcon from "../../Assests/Icons/ic_cancel.png";
+import useViewportWidth from "../Common/UseViewportWidth";
 
 function CodeSnippetDropdown({ collection }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -15,16 +16,19 @@ function CodeSnippetDropdown({ collection }) {
   const { state, dispatch } = useAppState();
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(collection.title);
+  const viewportWidth = useViewportWidth();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const dropdownStyle = {
-    minWidth: "600px",
+    // minWidth: "600px",
     maxWidth: "600px",
+    width:"80%",
+    flex:1,
     padding: "8px",
-    margin: "16px",
+    margin: "16px auto 16px auto",
     borderRadius: "4px",
     boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
     backgroundColor: primaryAccent,
@@ -41,6 +45,7 @@ function CodeSnippetDropdown({ collection }) {
       ? "0 4px 6px rgba(47, 129, 247, 0.6)"
       : "0 4px 6px rgba(47, 129, 247, 0.2)",
     position: "relative",
+
   };
 
   const dropdownIntecatorStyle = {
@@ -131,13 +136,15 @@ function CodeSnippetDropdown({ collection }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <button onClick={toggleDropdown} style={dropdownIntecatorStyle}>
-        <img
-          onClick={toggleDropdown}
-          style={dropdownIconStyle}
-          src={dropdownIcon}
-        />
-      </button>
+     {
+       viewportWidth>400&&<button onClick={toggleDropdown} style={dropdownIntecatorStyle}>
+       <img
+         onClick={toggleDropdown}
+         style={dropdownIconStyle}
+         src={dropdownIcon}
+       />
+     </button>
+     }
       <div onClick={toggleDropdown} style={dropdownText}>
         {isEditing ? (
           <input
@@ -159,7 +166,7 @@ function CodeSnippetDropdown({ collection }) {
         )}
       </div>
 
-      <div style={buttonContainerStyle}>
+      <div style={viewportWidth>400?buttonContainerStyle:{}}>
         <img
           src={isEditing ? saveIcon : editIcon}
           onClick={isEditing ? handleSaveEdit : handleEdit}

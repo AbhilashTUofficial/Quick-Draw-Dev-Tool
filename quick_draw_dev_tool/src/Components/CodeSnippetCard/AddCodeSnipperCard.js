@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { darkGrey } from "../../Assests/constants";
+import { innerColor } from "../../Assests/constants";
 import { useAppState } from "../../Context/AppContext";
 
 function AddCodeSnippetCard({collectionIndex}) {
@@ -12,7 +12,7 @@ function AddCodeSnippetCard({collectionIndex}) {
     margin: "15px auto",
     border: "1px solid lightgrey",
     padding: "16px",
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
     borderRadius: "4px",
     position: "relative",
     opacity: isHovered ? 0.8 : 0.4,

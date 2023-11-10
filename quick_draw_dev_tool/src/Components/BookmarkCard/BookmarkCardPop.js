@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Bookmark from "./Bookmark/Bookmark";
-import { darkGrey } from "../../Assests/constants";
+import { innerColor } from "../../Assests/constants";
 import AddBookmark from "./Bookmark/AddBookmark";
 import AddBookmarkForm from "./Bookmark/AddBookmarkForm";
 import editIcon from "../../Assests/Icons/ic_edit.png";
@@ -15,7 +15,7 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
     maxHeight: "400px",
     borderRadius: "4px",
     boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -57,7 +57,7 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
   };
 
   const buttonStyle = {
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
     border: "1px solid white",
     borderRadius: "99px",
     padding: "4px 4px",

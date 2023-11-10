@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import CodeSnippetCard from "./CodeSnippetCard";
 import AddCodeSnippetCard from "./AddCodeSnipperCard";
 import dropdownIcon from "../../Assests/Icons/ic_dropdown.png";
-import { darkGrey } from "../../Assests/constants";
+import { innerColor, primaryAccent } from "../../Assests/constants";
 import deleteIcon from "../../Assests/Icons/ic_delete.png";
 import editIcon from "../../Assests/Icons/ic_edit.png";
 import { useAppState } from "../../Context/AppContext";
+import saveIcon from "../../Assests/Icons/ic_checked.png";
+import cancelIcon from "../../Assests/Icons/ic_cancel.png";
 
 function CodeSnippetDropdown({ collection }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { state, dispatch } = useAppState();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(collection.title);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const deleteCard = () => {
   };
 
   const dropdownStyle = {
@@ -26,7 +27,7 @@ function CodeSnippetDropdown({ collection }) {
     margin: "16px",
     borderRadius: "4px",
     boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
-    backgroundColor: "#0D1117",
+    backgroundColor: primaryAccent,
     overflow: "hidden",
     transition: "transform 0.2s, background-color 0.2s",
     color: "white",
@@ -57,14 +58,14 @@ function CodeSnippetDropdown({ collection }) {
     height: "24px",
     opacity: 0.8,
     transform: isOpen ? "rotate(180deg)" : "rotate(360deg)",
-    transition: "transform 0.2s, transform 0.3s ease-out", 
+    transition: "transform 0.2s, transform 0.3s ease-out",
   };
 
   const dropdownText = {
     color: "white",
     margin: "8px",
-    width:"100%",
-    height:"100%"
+    width: "100%",
+    height: "100%",
   };
 
   const buttonContainerStyle = {
@@ -73,11 +74,10 @@ function CodeSnippetDropdown({ collection }) {
     right: "8px",
     display: "flex",
     justifyContent: "space-between",
-
   };
 
   const buttonStyle = {
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
     border: "1px solid white",
     borderRadius: "99px",
     padding: "4px 4px",
@@ -91,12 +91,11 @@ function CodeSnippetDropdown({ collection }) {
   };
 
   const handleDelete = () => {
-    console.log("called wiht: "+collection.index)
     dispatch({
       type: "DELETE_SNIPPET_COLLECTION",
       payload: {
-        deleteCollIndex:collection.index,
-        deleteCollection:{
+        deleteCollIndex: collection.index,
+        deleteCollection: {
           snippetIndex: collection.index,
           snippet: collection.snippet,
         },
@@ -104,8 +103,26 @@ function CodeSnippetDropdown({ collection }) {
     });
   };
 
+  const handleDiscard = () => {
+    setIsEditing(false);
+  };
+
   const handleEdit = () => {
-    // Add logic to handle edit
+    setIsEditing(!isEditing);
+  };
+
+  const handleSaveEdit = () => {
+    dispatch({
+      type: "EDIT_SNIPPET_COLLECTION",
+      payload: {
+        collectionIndex: collection.index,
+        updatedCollection: {
+          ...collection,
+          title: editedText,
+        },
+      },
+    });
+    setIsEditing(false);
   };
 
   return (
@@ -114,8 +131,7 @@ function CodeSnippetDropdown({ collection }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-   
-      <button onClick={()=>toggleDropdown} style={dropdownIntecatorStyle}>
+      <button onClick={toggleDropdown} style={dropdownIntecatorStyle}>
         <img
           onClick={toggleDropdown}
           style={dropdownIconStyle}
@@ -123,21 +139,54 @@ function CodeSnippetDropdown({ collection }) {
         />
       </button>
       <div onClick={toggleDropdown} style={dropdownText}>
-        {collection.title}
+        {isEditing ? (
+          <input
+            type="text"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            style={{
+              padding: "4px",
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              backgroundColor: "transparent",
+              color: "white",
+              fontSize: "16px",
+              textAlign: "center",
+            }}
+          />
+        ) : (
+          collection.title
+        )}
       </div>
 
       <div style={buttonContainerStyle}>
-        <img src={editIcon} onClick={() => handleEdit()} style={buttonStyle} />
-        <img src={deleteIcon} onClick={()=>handleDelete()} style={buttonStyle} />
+        <img
+          src={isEditing ? saveIcon : editIcon}
+          onClick={isEditing ? handleSaveEdit : handleEdit}
+          style={{
+            ...buttonStyle,
+            backgroundColor: isEditing ? "green" : innerColor,
+          }}
+        />
+        <img
+          src={isEditing ? cancelIcon : deleteIcon}
+          onClick={isEditing ? handleDiscard : handleDelete}
+          style={{
+            ...buttonStyle,
+            backgroundColor: isEditing ? "tomato" : innerColor,
+          }}
+        />
       </div>
-      
+
       {isOpen && (
         <>
-          <CodeSnippetCard collectionIndex={collection.index} snippets={collection.snippets} />
+          <CodeSnippetCard
+            collectionIndex={collection.index}
+            snippets={collection.snippets}
+          />
           <AddCodeSnippetCard collectionIndex={collection.index} />
         </>
       )}
-         
     </div>
   );
 }

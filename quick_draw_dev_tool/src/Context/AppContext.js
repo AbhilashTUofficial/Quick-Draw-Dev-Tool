@@ -38,7 +38,7 @@ const initialState = {
 const LOCAL_STORAGE_KEY = "myAppData";
 
 const AppContext = createContext();
-// localStorage.removeItem(LOCAL_STORAGE_KEY)
+
 var appReducer = (state, action) => {
   switch (action.type) {
     case "TOGGLE_CHECKBOX":
@@ -84,7 +84,6 @@ var appReducer = (state, action) => {
 
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ ...state, cards: updatedCards }));
 
-      console.log("after deleting card: " + JSON.stringify(updatedCards));
       return { ...state, cards: updatedCards };
 
     case "ADD_BOOKMARK":
@@ -262,6 +261,42 @@ var appReducer = (state, action) => {
 
       return { ...state, snippetCollections: updatedSnippetCollections };
 
+      case "EDIT_SNIPPET":
+        var { collectionIndex, snippetIndex, updatedSnippet } = action.payload;
+
+        console.log("collectionIndex: "+collectionIndex+"snippetIndex: "+snippetIndex+"updatedSnippet: "+updatedSnippet)
+        var collectionToUpdateIndex = state.snippetCollections.findIndex(
+          (collection) => collection.index === collectionIndex
+        );
+
+        if (collectionToUpdateIndex !== -1) {
+          var snippetCollections = [...state.snippetCollections];
+          var updatedCollection = { ...snippetCollections[collectionToUpdateIndex] };
+
+          var snippetToUpdateIndex = updatedCollection.snippets.findIndex(
+            (snippet) => snippet.snippetIndex === snippetIndex
+          );
+
+          if (snippetToUpdateIndex !== -1) {
+            updatedCollection.snippets[snippetToUpdateIndex] = {
+              snippetIndex: snippetIndex,
+              snippet: updatedSnippet.snippet,
+            };
+
+            snippetCollections[collectionToUpdateIndex] = updatedCollection;
+
+            var updatedStateWithEditSnippet = { ...state, snippetCollections };
+            localStorage.setItem(
+              LOCAL_STORAGE_KEY,
+              JSON.stringify(updatedStateWithEditSnippet)
+            );
+
+            return updatedStateWithEditSnippet;
+          }
+        }
+
+        return state;
+
     case "ADD_SNIPPET_COLLECTION":
       var collectionToAdd = action.payload;
       var updatedCollections = [...state.snippetCollections];
@@ -303,6 +338,42 @@ var appReducer = (state, action) => {
       );
 
       return { ...state, snippetCollections: massSnippetDelCollection };
+
+    case "EDIT_SNIPPET_COLLECTION":
+        var { collectionIndex, updatedCollection } = action.payload;
+      
+        // Find the index of the collection with the specified collectionIndex
+        var collectionToUpdateIndex = state.snippetCollections.findIndex(
+          (collection) => collection.index === collectionIndex
+        );
+      
+        // If the collection with the specified index is found
+        if (collectionToUpdateIndex !== -1) {
+          // Copy the state to avoid mutations
+          var snippetCollections = [...state.snippetCollections];
+          var updatedCollectionData = { ...snippetCollections[collectionToUpdateIndex] };
+      
+          // Update the collection data with the provided changes
+          updatedCollectionData.title = updatedCollection.title; // Update the title or other properties as needed
+      
+          // Replace the existing collection with the modified collection
+          snippetCollections[collectionToUpdateIndex] = updatedCollectionData;
+      
+          localStorage.setItem(
+            LOCAL_STORAGE_KEY,
+            JSON.stringify({ ...state, snippetCollections })
+          );
+      
+          return { ...state, snippetCollections };
+        }
+      
+        // If the collection with the specified index is not found, return the current state
+        return state;
+    
+    case "DISTROY_DATA":
+      localStorage.removeItem(LOCAL_STORAGE_KEY)
+      return {...state};
+
 
     case "LOAD_DATA":
       // Update the state with the data loaded from localStorage

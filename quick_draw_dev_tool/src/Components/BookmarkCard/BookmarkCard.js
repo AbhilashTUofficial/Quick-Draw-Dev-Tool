@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BookmarkCardPop from "./BookmarkCardPop";
 import reactNativeIcon from "../../Assests/Icons/ic_react_native.png";
-import { darkGrey } from "../../Assests/constants";
+import { innerColor, primaryAccent } from "../../Assests/constants";
 import { useAppState } from "../../Context/AppContext";
 
 const cardStyle = {
@@ -11,7 +11,7 @@ const cardStyle = {
   margin: "auto",
   borderRadius: "4px",
   boxShadow: "0 4px 6px rgba(47, 129, 247, 0.6)",
-  backgroundColor: "#0D1117",
+  backgroundColor: primaryAccent,
   overflow: "hidden",
   transition: "transform 0.2s, background-color 0.2s",
   color: "white",
@@ -23,7 +23,7 @@ const cardStyle = {
 
 const cardHoverStyle = {
   transform: "scale(1.1)",
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
 };
 
 function BookmarkCard({ card, cardIndex, index }) {

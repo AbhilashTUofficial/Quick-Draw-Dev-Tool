@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { darkGrey } from "../../../Assests/constants";
+import { innerColor } from "../../../Assests/constants";
 import bookmarkIcon from "../../../Assests/Icons/ic_react_native.png";
 import editIcon from "../../../Assests/Icons/ic_edit.png";
 import deleteIcon from "../../../Assests/Icons/ic_delete.png";
@@ -10,7 +10,7 @@ const cardStyle = {
   padding: "16px",
   margin: "auto",
   borderRadius: "4px",
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   overflow: "hidden",
   color: "white",
   display: "flex",
@@ -32,7 +32,7 @@ const buttonContainerStyle = {
 };
 
 const buttonStyle = {
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   border: "1px solid white",
   borderRadius: "99px",
   padding: "4px 4px",
@@ -60,11 +60,11 @@ function Bookmark({ key, name, url, cardIndex, bookmarkIndex, handleDeleteBookma
     handleEditBookmark(bookmarkIndex,name,url)
   };
 
-  // console.log(webkitURL)
   return (
     <div>
       {editing ? (
         <EditBookmarkForm
+        key={key}
           bookmarkName={name}
           cardIndex={cardIndex}
           bookmarkIndex={bookmarkIndex}
@@ -80,7 +80,7 @@ function Bookmark({ key, name, url, cardIndex, bookmarkIndex, handleDeleteBookma
             alt="Bookmark"
             style={addButtonStyle}
           />
-          <div style={{padding:"2px"}} onClick={handleClick}>{name}</div>
+          <div style={{padding:"2px"}} onClick={handleClick}>{name.slice(0,12)}</div>
           <div style={buttonContainerStyle}>
             <img src={deleteIcon} onClick={()=>handleDelete()} style={buttonStyle} />
             <img

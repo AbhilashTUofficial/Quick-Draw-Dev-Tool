@@ -1,5 +1,5 @@
 import React from "react";
-import { darkGrey } from "../../../Assests/constants";
+import { innerColor } from "../../../Assests/constants";
 import addIcon from "../../../Assests/Icons/ic_add.png"
 const cardStyle = {
   width: "100px",
@@ -7,7 +7,7 @@ const cardStyle = {
   padding: "16px",
   margin: "auto",
   borderRadius: "4px",
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   overflow: "hidden",
   color: "white",
   display: "flex",

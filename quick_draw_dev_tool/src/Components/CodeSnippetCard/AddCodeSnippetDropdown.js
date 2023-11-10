@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { darkGrey } from "../../Assests/constants";
+import { innerColor } from "../../Assests/constants";
 import { useAppState } from "../../Context/AppContext";
 
 function AddCodeSnippetDropdown() {
@@ -22,7 +22,7 @@ function AddCodeSnippetDropdown() {
     justifyContent: "center",
     border: "1px solid lightgrey",
     padding: "8px",
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
     borderRadius: "4px",
     position: "relative",
     opacity: isHovered ? 0.8 : 0.4,

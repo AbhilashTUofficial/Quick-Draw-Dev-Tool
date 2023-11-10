@@ -9,6 +9,7 @@ import CodeSnippetCard from "./Components/CodeSnippetCard/CodeSnippetCard";
 import CodeSnippetDropdown from "./Components/CodeSnippetCard/CodeSnippetDropdown";
 import AddCodeSnippetDropdown from "./Components/CodeSnippetCard/AddCodeSnippetDropdown";
 import CodeSnippetContainer from "./Components/CodeSnippetCard/CodeSnippetContainer";
+import DataControlButtons from "./Components/DataControlButtons";
 function App() {
 
 
@@ -30,8 +31,9 @@ function App() {
   return (
     <AppProvider>
       <div className="App" style={containerStyle}>
+        <DataControlButtons/>
         <GridContainer />
-        <SearchBar />
+        {/* <SearchBar /> */}
         {/* <FilteredCards /> */}
         <CodeSnippetContainer/>
         <AddCodeSnippetDropdown/>

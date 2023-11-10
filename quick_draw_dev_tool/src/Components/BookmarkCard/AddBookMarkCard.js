@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { darkGrey, primaryAccent } from "../../Assests/constants";
+import { innerColor, primaryAccent } from "../../Assests/constants";
 import addIcon from "../../Assests/Icons/ic_add.png";
 
 const cardStyle = {
@@ -20,7 +20,7 @@ const cardStyle = {
   
   const cardHoverStyle = {
     transform: "scale(1.1)",
-    backgroundColor: darkGrey,
+    backgroundColor: innerColor,
   };
 
 function AddBookmarkCard() {

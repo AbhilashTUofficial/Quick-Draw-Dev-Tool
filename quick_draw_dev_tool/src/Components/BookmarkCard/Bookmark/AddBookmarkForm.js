@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { darkGrey } from "../../../Assests/constants";
+import { innerColor } from "../../../Assests/constants";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const cardStyle = {
@@ -8,7 +8,7 @@ const cardStyle = {
   padding: "16px",
   margin: "auto",
   borderRadius: "4px",
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   overflow: "hidden",
   color: "white",
   display: "flex",
@@ -20,7 +20,7 @@ const cardStyle = {
 };
 
 const inputStyle = {
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   border: "none",
   borderBottom: "1px solid white",
   padding: "4px",
@@ -37,7 +37,7 @@ const buttonContainerStyle = {
 };
 
 const buttonStyle = {
-  backgroundColor: darkGrey,
+  backgroundColor: innerColor,
   border: "1px solid white", 
   borderRadius: "4px",
   padding: "4px 8px",

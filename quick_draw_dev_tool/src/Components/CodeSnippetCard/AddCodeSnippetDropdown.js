@@ -6,10 +6,6 @@ function AddCodeSnippetDropdown() {
   const [isHovered, setIsHovered] = useState(false);
   const { state, dispatch } = useAppState();
 
-  const deleteCard = () => {
-    // Implement card deletion logic
-  };
-
   const dropdownStyle = {
     minWidth: "600px",
     maxWidth: "600px",
@@ -43,13 +39,14 @@ function AddCodeSnippetDropdown() {
       },
     });
   };
+
   return (
     <div
       style={dropdownStyle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div onClick={() => handleAddSnippetCollection()} style={dropdownText}>
+      <div onClick={handleAddSnippetCollection} style={dropdownText}>
         Add New Snippet Collection
       </div>
     </div>

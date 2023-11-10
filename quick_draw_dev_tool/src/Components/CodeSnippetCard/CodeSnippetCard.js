@@ -71,7 +71,7 @@ function CodeSnippetCard({ collectionIndex, snippets }) {
     }
   };
 
-  const handleSave = (index,snippetIndex) => {
+  const handleSave = (index, snippetIndex) => {
     // Dispatch an action to save the edited snippet
     dispatch({
       type: "EDIT_SNIPPET",
@@ -108,7 +108,7 @@ function CodeSnippetCard({ collectionIndex, snippets }) {
               src={editableSnippets[index] ? saveIcon : editIcon}
               onClick={() => {
                 if (editableSnippets[index]) {
-                  handleSave(index,data.snippetIndex);
+                  handleSave(index, data.snippetIndex);
                 } else {
                   toggleEdit(index);
                 }
@@ -129,7 +129,9 @@ function CodeSnippetCard({ collectionIndex, snippets }) {
               }}
               style={{
                 ...buttonStyle,
-                backgroundColor: editableSnippets[index] ? "tomato" : innerColor,
+                backgroundColor: editableSnippets[index]
+                  ? "tomato"
+                  : innerColor,
               }}
             />
           </div>

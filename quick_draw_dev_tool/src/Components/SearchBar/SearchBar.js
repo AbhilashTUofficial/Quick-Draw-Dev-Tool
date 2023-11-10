@@ -3,7 +3,7 @@ import { useAppState } from "../../Context/AppContext";
 import { custBlue, primaryAccent } from "../../Assests/constants";
 
 function SearchBar() {
-  const { state, dispatch } = useAppState(); // Get the state and dispatch from the context
+  const { state, dispatch } = useAppState();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleCheckboxToggle = (checkboxName) => {
@@ -50,8 +50,8 @@ function SearchBar() {
   };
 
   const checkboxLabelStyle = {
-    marginRight: "10px", // Adjust spacing between checkbox and label
-    fontSize: "14px", // Customize label font size
+    marginRight: "10px", 
+    fontSize: "14px", 
   };
 
   return (

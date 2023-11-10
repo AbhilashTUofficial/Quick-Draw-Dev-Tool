@@ -3,6 +3,7 @@ import { innerColor } from "../../../Assests/constants";
 import { toast } from "react-toastify";
 import { useAppState } from "../../../Context/AppContext";
 import "react-toastify/dist/ReactToastify.css";
+
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -103,7 +104,7 @@ function EditBookmarkForm({
       });
       onCancel();
     } else {
-      toast("Dont leave them blank", {
+      toast("Don't leave them blank", {
         type: "warning",
       });
 

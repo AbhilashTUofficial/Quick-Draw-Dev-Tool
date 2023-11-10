@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import reloadIcon from "../Assests/Icons/ic_reload.png";
 import deleteIcon from "../Assests/Icons/ic_delete.png";
 import { innerColor } from "../Assests/constants";
 import { useAppState } from "../Context/AppContext";
 
-function DataControlButtons({}) {
+function DataControlButtons() {
   const { state, dispatch } = useAppState();
 
   const buttonContainerStyle = {
@@ -27,29 +27,47 @@ function DataControlButtons({}) {
     height: "24px",
     marginLeft: "10px",
     marginRight: "10px",
+    transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
   };
 
-  const handleDeleteData = () => {
-    dispatch({
-      type: "DISTROY_DATA",
-    });
-    window.history.go(0);
-  };
+  const [reloadRotation, setReloadRotation] = useState(0);
 
   const handleReloadPage = () => {
-    window.history.go(0);
+    setReloadRotation(reloadRotation + 360);
+    setTimeout(() => {
+      setReloadRotation(0);
+      window.location.reload();
+    }, 300);
+  };
+
+  const [deleteScale, setDeleteScale] = useState(1);
+  const [deleteOpacity, setDeleteOpacity] = useState(1);
+
+  const handleDeleteData = () => {
+    setDeleteScale(0); 
+    setDeleteOpacity(0); 
+
+    setTimeout(() => {
+      dispatch({
+        type: "DISTROY_DATA",
+      });
+      window.history.go(0);
+    }, 300);
   };
 
   return (
     <div style={buttonContainerStyle}>
       <img
         src={reloadIcon}
-        onClick={() => handleReloadPage()}
-        style={buttonStyle}
+        onClick={handleReloadPage}
+        style={{
+          ...buttonStyle,
+          transform: `rotate(${reloadRotation}deg)`,
+        }}
       />
       <img
         src={deleteIcon}
-        onClick={() => handleDeleteData()}
+        onClick={handleDeleteData}
         style={buttonStyle}
       />
     </div>

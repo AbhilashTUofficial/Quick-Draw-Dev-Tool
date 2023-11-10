@@ -1,18 +1,13 @@
 import "./App.css";
-import { primary, primaryAccent } from "./Assests/constants";
-import GridContainer from "./Components/BookmarkCard/GridContainer";
-import SearchBar from "./Components/SearchBar/SearchBar";
-import SearchResultCard from "./Components/SearchResultCard/SearchResultCard";
+import { primaryAccent } from "./Assests/constants";
 import { AppProvider, useAppState } from "./Context/AppContext";
-import './Components/Common/CustomScrollbar.css';
-import CodeSnippetCard from "./Components/CodeSnippetCard/CodeSnippetCard";
-import CodeSnippetDropdown from "./Components/CodeSnippetCard/CodeSnippetDropdown";
+import GridContainer from "./Components/BookmarkCard/GridContainer";
 import AddCodeSnippetDropdown from "./Components/CodeSnippetCard/AddCodeSnippetDropdown";
-import CodeSnippetContainer from "./Components/CodeSnippetCard/CodeSnippetContainer";
 import DataControlButtons from "./Components/DataControlButtons";
+import SearchResultCard from "./Components/SearchResultCard/SearchResultCard";
+import CodeSnippetContainer from "./Components/CodeSnippetCard/CodeSnippetContainer";
+
 function App() {
-
-
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -22,22 +17,22 @@ function App() {
     backgroundColor: primaryAccent,
   };
 
+  const { state } = useAppState;
+
   function FilteredCards() {
-    const { state } = useAppState();
-    const visibleCards = [1, 2, 3, 4].filter((number) => state[`checkbox${number}`]);
+    const visibleCards = [1, 2, 3, 4].filter(
+      (number) => state[`checkbox${number}`]
+    );
     return visibleCards.map((number) => <SearchResultCard key={number} />);
   }
 
   return (
     <AppProvider>
       <div className="App" style={containerStyle}>
-        <DataControlButtons/>
+        <DataControlButtons />
         <GridContainer />
-        {/* <SearchBar /> */}
-        {/* <FilteredCards /> */}
-        <CodeSnippetContainer/>
-        <AddCodeSnippetDropdown/>
-
+        <CodeSnippetContainer />
+        <AddCodeSnippetDropdown />
       </div>
     </AppProvider>
   );

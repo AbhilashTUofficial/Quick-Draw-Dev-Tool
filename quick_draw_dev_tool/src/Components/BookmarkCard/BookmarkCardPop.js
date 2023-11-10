@@ -19,7 +19,6 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    // justifyContent: "center",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -37,7 +36,6 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
   };
 
   const containerWrapperStyle = {
-    // overflow: "hidden",
     overflowY: "auto",
   };
 
@@ -190,11 +188,11 @@ function BookmarkCardPop({ data, setPopupVisible, cardIndex }) {
       </div>
 
       <div style={buttonContainerStyle}>
-        <img
+        {/* <img
           src={editIcon}
           onClick={() => handleEditBookmark()}
           style={buttonStyle}
-        />
+        /> */}
         <img
           src={deleteIcon}
           onClick={() => handleDeleteCard()}

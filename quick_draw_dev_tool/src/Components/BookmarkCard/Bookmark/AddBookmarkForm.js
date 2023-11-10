@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { innerColor } from "../../../Assests/constants";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Styles for the card
 const cardStyle = {
   width: "100px",
   height: "100px",
@@ -15,42 +17,47 @@ const cardStyle = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  border: "1px solid white",
-  transition: "border 0.3s linear", // Add line border style
+  border: "1px solid white", // Add line border style
+  transition: "border 0.3s linear", // Add border transition
 };
 
+// Input field style
 const inputStyle = {
   backgroundColor: innerColor,
   border: "none",
   borderBottom: "1px solid white",
   padding: "4px",
-  margin: "4px", 
+  margin: "4px",
   color: "white",
-  width: "80px", 
+  width: "80px",
   outline: "none",
 };
 
+// Button container style
 const buttonContainerStyle = {
   display: "flex",
-  justifyContent: "space-between", 
-  margin: "8px", 
+  justifyContent: "space-between",
+  margin: "8px",
 };
 
+// Button style
 const buttonStyle = {
   backgroundColor: innerColor,
-  border: "1px solid white", 
+  border: "1px solid white",
   borderRadius: "4px",
   padding: "4px 8px",
-  margin: "4px", 
+  margin: "4px",
   color: "white",
   cursor: "pointer",
 };
 
+// Error border style
 const errorBorderStyle = {
   border: "1px solid red",
   animation: "blink 1s infinite",
 };
 
+// Keyframes for error blinking animation
 const blinkKeyframes = `
   @keyframes blink {
     0%, 100% { border-color: red; }
@@ -58,19 +65,15 @@ const blinkKeyframes = `
   }
 `;
 
-
-
+// Create a style tag and append the blinkKeyframes to it
 const styleTag = document.createElement("style");
 styleTag.type = "text/css";
 styleTag.appendChild(document.createTextNode(blinkKeyframes));
 document.head.appendChild(styleTag);
 
 function AddBookmarkForm({ onAddBookmark, onCancel }) {
-
   const validUrlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-
   const [error, setError] = useState(false);
-
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
@@ -87,9 +90,10 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
       onAddBookmark(name, url, Math.round(Math.random() * 10000));
       setName("");
       setUrl("");
-    }else{
-      toast('Dont leave them blank', {
-        type: 'warning',
+    } else {
+      // Show a warning toast message
+      toast("Don't leave them blank", {
+        type: "warning",
       });
 
       setError(true);
@@ -97,20 +101,22 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
       setTimeout(() => {
         setError(false);
       }, 2000);
-      
     }
   };
 
   useEffect(() => {
+    // Read clipboard text and set it as the URL if it's a valid URL
     navigator.clipboard.readText().then((clipboardText) => {
-      if(validUrlRegex.test(clipboardText)){
-        setUrl(clipboardText.slice(0, 100)); 
-
+      if (validUrlRegex.test(clipboardText)) {
+        setUrl(clipboardText.slice(0, 100));
       }
     });
+
+    // Listen for paste events
     document.addEventListener("paste", handleClipboardChange);
 
     return () => {
+      // Clean up the event listener
       document.removeEventListener("paste", handleClipboardChange);
     };
   }, []);
@@ -123,7 +129,7 @@ function AddBookmarkForm({ onAddBookmark, onCancel }) {
   };
 
   return (
-    <div style={{...cardStyle,...(error && errorBorderStyle)}}>
+    <div style={{ ...cardStyle, ...(error && errorBorderStyle) }}>
       <input
         type="text"
         placeholder="Name"

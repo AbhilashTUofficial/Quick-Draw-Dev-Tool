@@ -1,5 +1,5 @@
 import React from 'react';
-import CodeSnippetDropdown from './CodeSnippetDropdown'; // Import the CodeSnippetDropdown component
+import CodeSnippetDropdown from './CodeSnippetDropdown';
 import { useAppState } from '../../Context/AppContext';
 
 export default function CodeSnippetContainer() {
@@ -8,9 +8,8 @@ export default function CodeSnippetContainer() {
 
     return (
         <div>
-            {snippetCollections && Array.isArray(snippetCollections) ? (
+            {Array.isArray(snippetCollections) ? (
                 snippetCollections.map((collection, index) => (
-                    
                     <CodeSnippetDropdown key={index} collection={collection} />
                 ))
             ) : (

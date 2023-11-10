@@ -46,15 +46,13 @@ function BookmarkCard({ card, cardIndex, index }) {
     setTimeout(() => {
       setIsClicked(false);
       setPopupVisible(true);
-    }, 200); // Show the popup after 200ms
+    }, 200);
   };
 
   const handleEditClick = () => {
     // Handle the edit button click
     console.log("Edit button clicked");
   };
-
-
 
   return (
     <div>

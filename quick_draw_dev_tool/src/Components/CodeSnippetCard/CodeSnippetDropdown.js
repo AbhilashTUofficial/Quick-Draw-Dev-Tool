@@ -35,7 +35,7 @@ function CodeSnippetDropdown({ collection }) {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    transition: "transform 0.2s, box-shadow 0.2s, transform 0.3s ease-out", // Add ease-out transition
+    transition: "transform 0.2s, box-shadow 0.2s, transform 0.3s ease-out",
     transform: isHovered ? "scale(1.05) translateY(-4px)" : "scale(1)",
     boxShadow: isHovered
       ? "0 4px 6px rgba(47, 129, 247, 0.6)"

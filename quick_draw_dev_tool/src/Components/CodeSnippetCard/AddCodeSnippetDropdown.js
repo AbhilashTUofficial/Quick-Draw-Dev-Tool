@@ -7,7 +7,7 @@ function AddCodeSnippetDropdown() {
   const { state, dispatch } = useAppState();
 
   const dropdownStyle = {
-    minWidth: "600px",
+    width:"80%",
     maxWidth: "600px",
     margin: "16px",
     overflow: "hidden",

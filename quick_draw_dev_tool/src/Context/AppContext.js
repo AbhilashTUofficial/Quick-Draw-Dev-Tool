@@ -27,8 +27,8 @@ const initialState = {
       bookmarks: [
         {
           bookmarkIndex: 0,
-          bookmarkName: "Google",
-          bookmarkUrl: "www.google.com",
+          bookmarkName: "GitHub",
+          bookmarkUrl: "https://github.com/AbhilashTUofficial",
         },
       ],
     },

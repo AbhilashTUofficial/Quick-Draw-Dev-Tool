@@ -1,12 +1,17 @@
+import BookmarkColletions from '@/app/Components/Bookmark/BookmarkCollections';
 import NavigationBar from '@/app/Components/NavigationBar'
 import React from 'react'
-
 const Home = () => {
+  console.log("Home: loaded");
+
   return (
     <>
-    <section className={'p-2 bg-white w-full h-full'}>
-      <div>heyy</div>
-    </section>
+    <body>
+    <NavigationBar />
+    <BookmarkColletions/>
+    </body>
+
+
     </>
   )
 }

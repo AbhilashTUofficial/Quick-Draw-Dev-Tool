@@ -38,7 +38,7 @@ const SnippetCollection: SnippetCollectionType = ({ id }) => {
 
     return (
         // 
-        <div className={`collapse componentStyle my-6 mx-4 `}>
+        <div className={`collapse tileSyle my-6 `}>
             <input
                 type="checkbox"
                 onChange={toggleContent}
@@ -49,7 +49,7 @@ const SnippetCollection: SnippetCollectionType = ({ id }) => {
                 <div data-them='dark' className='flex justify-between items-center '>
                     <div>
                         <div className='py-2'>Snippet Collection</div>
-                        <div className="badge badge-info mr-2">+30</div>
+                        <div className="badge badge-info text-white mr-2">+30</div>
                         <div className="badge badge-outline mr-2">React Native</div>
                         <div className="badge badge-outline mr-2">Javascript</div>
                     </div>

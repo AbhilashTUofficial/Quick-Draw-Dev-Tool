@@ -1,8 +1,9 @@
 
-export default function Home() {
+export default function landing() {
   return (
   <body>
 
   </body>
   )
 }
+

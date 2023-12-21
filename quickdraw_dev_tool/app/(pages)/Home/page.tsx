@@ -1,20 +1,22 @@
+'use client'
 import BookmarkColletions from '@/app/Components/Bookmark/BookmarkCollections';
 import NavigationBar from '@/app/Components/NavigationBar'
 import SnippetCollections from '@/app/Components/Snippet/SnippetCollections';
 import React from 'react'
+import { useSelector } from 'react-redux';
 const Home = () => {
   console.log("Home: loaded");
 
-  return (
+  const data = useSelector(state => state.app);
+  console.log("data: "+JSON.stringify(data))
+    return (
     <>
-    <body className=' flex flex-col items-center justify-center'>
     <NavigationBar />
-    <BookmarkColletions/>
+    <BookmarkColletions bookmarkCollections={data.bookmarkCollections}/>
     <SnippetCollections/>
-    </body>
-
-
     </>
+
+
   )
 }
 

@@ -10,14 +10,16 @@
 body {
   /* background: black; */
   cursor: url('./Assests/Icons/cursor.png')16 16,auto;
+  @apply flex flex-col items-center justify-center;
 }
 
-.componentStyle{
-  @apply bg-neutral shadow-lg text-neutral-content p-4 overflow-auto rounded-md;
+.tileSyle{
+  @apply bg-neutral shadow-lg text-neutral-content p-4  rounded-md;
 }
-.componentStyle:hover{
+.tileSyle:hover{
   @apply hover:-translate-y-1 transition-all hover:shadow-xl hover:shadow-indigo-500/20;
 }
+
 
 /* width */
 ::-webkit-scrollbar {

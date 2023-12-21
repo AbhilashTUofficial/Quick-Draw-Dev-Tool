@@ -42,7 +42,7 @@ const SnippetDropdown:SnippetDropdownType = ({collectionID,snippetID,title,conte
     }
     return (
 
-        <details className="collapse bg-base-200 border border-base-300 my-4">
+        <details data-theme='dark' className="collapse transition-all duration-200 bg-base-200 border border-base-300 my-4">
             <summary className="collapse-title flex flex-col justify-between items-center ">
                 {title}
                 <div className='inline absolute right-0'>

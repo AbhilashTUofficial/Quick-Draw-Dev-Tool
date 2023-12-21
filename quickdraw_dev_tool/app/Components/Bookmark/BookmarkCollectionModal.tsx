@@ -1,23 +1,35 @@
 'use client'
 
+import { BookmarkCollectionModalType } from '@/app/Types/Components'
+import { bookmarkType } from '@/app/Types/Variables'
 import React, { useEffect } from 'react'
 
-type BookmarkCollectionModalProp = {
-    (arg0: ({ key: string; id: string; onClose: (id: string|null) => void })): React.JSX.Element;
-}
-const BookmarkCollectionModal: BookmarkCollectionModalProp = ({ key, id, onClose }) => {
+const BookmarkCollectionModal:BookmarkCollectionModalType = ({closeModal,bookmarks}) => {
+
 
     return (
-        <dialog id="my_modal_3" className="modal">
-                        <div className="modal-box">
-                            <form method="dialog">
-                                {/* if there is a button in form, it will close the modal */}
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                            </form>
-                            <h3 className="font-bold text-lg">Hello!</h3>
-                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
-                        </div>
-                    </dialog>
+        <dialog id="my_modal_3" className="modal" onClick={() => closeModal()}>
+            <div className="modal-box w-[600px] max-w-[600px] max-h-[600px]">
+
+                <div className=' grid grid-cols-4 place-items-center'>
+                    {
+                        bookmarks.map((bookmark: bookmarkType) => {
+                            return (
+                                <div key={bookmark.bookmarkId} data-theme='dark' className='group w-[120px] h-[120px] aspect-square card border border-white border-opacity-40 p-4 m-2 hover:border-opacity-80 '>
+                                    <figure><img className='w-80 h-80' src="next.svg" alt="Album" /></figure>
+                                    <div className='text-center group-hover:text-white'>
+                                        <text>{bookmark.title}</text>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+            <form method="dialog" className='modal-backdrop'>
+                <button>close</button>
+            </form>
+        </dialog>
     )
 }
 

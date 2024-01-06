@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   console.log("Home: loaded");
 
-  const data = useSelector(state => state.app);
+  const data = useSelector((state: any) => state.app);
   console.log("data: "+JSON.stringify(data))
     return (
     <>

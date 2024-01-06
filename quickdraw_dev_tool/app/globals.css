@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* background-color: 255, 255, 255; */
+  padding: 8px;
+}
+
+body {
+  /* background: black; */
+  cursor: url('./Assests/Icons/cursor.png')16 16,auto;
+  @apply flex flex-col items-center justify-center;
+}
+
+.tileSyle{
+  @apply bg-neutral shadow-lg text-neutral-content p-4  rounded-md;
+}
+.tileSyle:hover{
+  @apply hover:-translate-y-1 transition-all hover:shadow-xl hover:shadow-indigo-500/20;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffffff15;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 999px;
+}

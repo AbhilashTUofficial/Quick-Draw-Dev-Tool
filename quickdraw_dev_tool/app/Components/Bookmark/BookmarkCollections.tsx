@@ -8,8 +8,8 @@ import { bookmarkCollectionsType } from '@/app/Types/Variables';
 const BookmarkCollections: BookmarkCollectionsType = ({ bookmarkCollections }) => {
 
     const openModalHanlder = (id: string) => {
-        const modalElement=document.getElementById('my_modal_3');
-        modalElement&& modalElement.showModal();
+        // const modalElement=document.getElementById('my_modal_3');
+        // modalElement&& modalElement.showModal();
         // if(document.getElementById('my_modal_3')){
         //     document.getElementById('my_modal_3').showModal();
         // }

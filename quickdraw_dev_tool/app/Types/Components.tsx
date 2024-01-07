@@ -3,7 +3,7 @@
 import { bookmarkCollectionsType, bookmarkType } from "./Variables";
 
 export interface BookmarkCollectionsType {
-    (arg0: { bookmarkCollections: bookmarkCollectionsType }): React.JSX.Element;
+    (arg0: { bookmarkCollections: bookmarkCollectionsType[] }): React.JSX.Element;
 }
 
 export interface BookmarkCollectionType {

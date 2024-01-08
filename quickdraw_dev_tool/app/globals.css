@@ -20,6 +20,34 @@ body {
   @apply hover:-translate-y-1 transition-all hover:shadow-xl hover:shadow-indigo-500/20;
 }
 
+.pointerShadow {
+  width: 60px;
+  height: 60px;
+  background-color: rgb(99 102 241);
+  opacity: 0.6;
+  transform: translate(-50%, -50%);
+  /* background-image: url('./Assests/Icons/cursor.png'); */
+  /* background-image: url('./Assests/Images/blob_1.gif'); */
+  border-radius: 99px;
+  background-repeat: no-repeat;
+  position: absolute;
+  backdrop-filter: blur(50px);
+  -webkit-filter: blur(50px);
+  -moz-filter: blur(50px);
+  -o-filter: blur(50px);
+  -ms-filter: blur(50px);
+  filter: blur(50px);
+  animation: rotateAnimation 1s linear infinite;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* width */
 ::-webkit-scrollbar {

@@ -19,7 +19,7 @@ const AuthBtns = () => {
                             <Link className='justify-between py-2'
                                 href={'/'}>
                                 Profile
-                                <span className="badge">
+                                <span className="badge badge-outline mr-2">
                                     New
                                 </span>
                             </Link>

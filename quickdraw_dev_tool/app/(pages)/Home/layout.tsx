@@ -16,17 +16,17 @@ export default function RootLayout({
 }) {
   const [isdark, setIsdark] = useState(true);
   useEffect(() => {
-    console.log("called"+localStorage.getItem('isdark'))
+    console.log("called" + localStorage.getItem('isdark'))
   }, [isdark]);
 
-    return (
-    <html lang="en" data-theme={isdark?'dark':'light'} >
+  return (
+    <html lang="en" data-theme={isdark ? 'dark' : 'light'} >
       <body className={inter.className}>
-      <NavigationBar >    
-        <MenuBtn />
-        <TitleBtn />
-        <TrailingBtns />
-      </NavigationBar>
+        <NavigationBar >
+          <MenuBtn />
+          <TitleBtn />
+          <TrailingBtns />
+        </NavigationBar>
         {children}</body>
     </html>
   )
